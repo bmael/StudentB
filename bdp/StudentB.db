@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<db_xml>
+    <atelierb version="3_7_ubuntu-cvs" />
+    <project decomp_dir="E:\Dev\B\StudentB\bdp\expand_src" old_decomp_dir="E:\Dev\B\StudentB\bdp\src" type="VALIDATION">
+        <!-- Definition directory list -->
+        <!-- Component file list -->
+        <component_file path="E:/Dev/B/StudentB" name="Manager" suffix="mch" user="Maël">
+            <component name="Manager" type="specification" />
+        </component_file>
+    </project>
+</db_xml>

@@ -1,0 +1,103 @@
+﻿THEORY BalanceX IS
+  Manager,24,1,0,22,0,1,0;
+  Initialisation,6,0,0,6,0,0,0;
+  subscribe,3,0,0,3,0,0,0;
+  unsubscribe,4,0,0,3,0,1,0;
+  subscribeToModule,1,0,0,1,0,0,0;
+  unsubscribeOfModule,2,0,0,2,0,0,0;
+  subscribeToProject,1,0,0,1,0,0,0;
+  unsubscribeOfProject,1,0,0,1,0,0,0;
+  createModule,2,0,0,2,0,0,0;
+  getGroups,0,0,0,0,0,0,0;
+  createProject,4,1,0,3,0,0,0;
+  projectsOf,0,0,0,0,0,0,0
+END
+&
+THEORY ProofState IS
+  Proved(Util);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(2);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0)
+END
+&
+THEORY MethodList IS
+  pp(rt.1);
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr
+END
+&
+THEORY PassList IS
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(2),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?
+END
+&
+THEORY ManForms 
+END
+&
+THEORY Version IS
+  POVersion("V4.0-29507")(CLT == "V4.0-31779")(genOPO == KO, genDivergencePO == KO, project_type == VALIDATION_TYPE, local_op == OK);
+  PRVersion("svn")(CLT == "V4.0-31779")
+END

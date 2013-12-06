@@ -1,0 +1,80 @@
+﻿THEORY ProofList IS
+  _f(1) & _f(13) & _f(40) & createProject.4,(_f(19) => _f(44));
+  _f(1) & _f(13) & _f(40) & createProject.3,(_f(17) => _f(43));
+  _f(1) & _f(13) & _f(40) & createProject.2,(_f(38) => _f(42));
+  _f(1) & _f(13) & _f(40) & createProject.1,(_f(38) => _f(41));
+  _f(1) & _f(13) & _f(36) & createModule.2,(_f(38) => _f(39));
+  _f(1) & _f(13) & _f(36) & createModule.1,(_f(15) => _f(37));
+  _f(1) & _f(13) & _f(34) & unsubscribeOfProject.1,(_f(17) => _f(35));
+  _f(1) & _f(13) & _f(32) & subscribeToProject.1,(_f(17) => _f(33));
+  _f(1) & _f(13) & _f(29) & unsubscribeOfModule.2,(_f(17) => _f(31));
+  _f(1) & _f(13) & _f(29) & unsubscribeOfModule.1,(_f(15) => _f(30));
+  _f(1) & _f(13) & _f(27) & subscribeToModule.1,(_f(15) => _f(28));
+  _f(1) & _f(13) & _f(21) & unsubscribe.4,(_f(19) => _f(26));
+  _f(1) & _f(13) & _f(21) & unsubscribe.3,(_f(17) => _f(25));
+  _f(1) & _f(13) & _f(21) & unsubscribe.2,(_f(15) => _f(24));
+  _f(1) & _f(13) & _f(21) & unsubscribe.1,(_f(22) => _f(23));
+  _f(1) & _f(13) & _f(14) & subscribe.3,(_f(19) => _f(20));
+  _f(1) & _f(13) & _f(14) & subscribe.2,(_f(17) => _f(18));
+  _f(1) & _f(13) & _f(14) & subscribe.1,(_f(15) => _f(16));
+  _f(1) & Initialisation.6,(_f(10) => _f(12));
+  _f(1) & Initialisation.5,(_f(10) => _f(11));
+  _f(1) & Initialisation.4,(_f(8) => _f(9));
+  _f(1) & Initialisation.3,(_f(6) => _f(7));
+  _f(1) & Initialisation.2,(_f(4) => _f(5));
+  _f(1) & Initialisation.1,(_f(2) => _f(3))
+END
+&
+THEORY Formulas IS
+  ("`Component properties'" & STUDENTS: FIN(INTEGER) & not(STUDENTS = {}) & MODULES: FIN(INTEGER) & not(MODULES = {}) & PROJECTS: FIN(INTEGER) & not(PROJECTS = {}));
+  "`Check that the invariant (students <: STUDENTS) is established by the initialisation - ref 3.3'";
+  ({}: POW(STUDENTS));
+  "`Check that the invariant (modules <: MODULES) is established by the initialisation - ref 3.3'";
+  ({}: POW(MODULES));
+  "`Check that the invariant (projects <: PROJECTS) is established by the initialisation - ref 3.3'";
+  ({}: POW(PROJECTS));
+  "`Check that the invariant (moduleOfStudent: students <-> modules) is established by the initialisation - ref 3.3'";
+  ({}: {} <-> {});
+  "`Check that the invariant (moduleOfProject: projects --> modules) is established by the initialisation - ref 3.3'";
+  ({}: {} +-> {});
+  (dom({}) = {});
+  ("`Component invariant'" & students: POW(STUDENTS) & modules: POW(MODULES) & projects: POW(PROJECTS) & moduleOfStudent: students <-> modules & moduleOfProject: projects +-> modules & dom(moduleOfProject) = projects & projectOfStudent: students <-> projects & moduleOfProjectOfStudent: students +-> moduleOfProject);
+  ("`subscribe preconditions in this component'" & ss: STUDENTS & not(ss: students));
+  "`Check that the invariant (moduleOfStudent: students <-> modules) is preserved by the operation - ref 3.4'";
+  (moduleOfStudent: students\/{ss} <-> modules);
+  "`Check that the invariant (projectOfStudent: students <-> projects) is preserved by the operation - ref 3.4'";
+  (projectOfStudent: students\/{ss} <-> projects);
+  "`Check that the invariant (moduleOfProjectOfStudent: students +-> moduleOfProject) is preserved by the operation - ref 3.4'";
+  (moduleOfProjectOfStudent: students\/{ss} +-> moduleOfProject);
+  ("`unsubscribe preconditions in this component'" & ss: STUDENTS & ss: students & ss: dom(moduleOfStudent) & ss: dom(projectOfStudent) & ss: dom(moduleOfProjectOfStudent));
+  "`Check that the invariant (students <: STUDENTS) is preserved by the operation - ref 3.4'";
+  (students-{ss}: POW(STUDENTS));
+  ({ss}<<|moduleOfStudent: students-{ss} <-> modules);
+  ({ss}<<|projectOfStudent: students-{ss} <-> projects);
+  ({ss}<<|moduleOfProjectOfStudent: students-{ss} +-> moduleOfProject);
+  ("`subscribeToModule preconditions in this component'" & ss: STUDENTS & ss: students & mm: MODULES & mm: modules & not(ss: dom(moduleOfStudent)));
+  (moduleOfStudent<+{ss|->mm}: students <-> modules);
+  ("`unsubscribeOfModule preconditions in this component'" & ss: STUDENTS & ss: students & mm: MODULES & mm: modules & ss: dom(moduleOfStudent) & mm: ran(moduleOfStudent));
+  (moduleOfStudent-{ss|->mm}: students <-> modules);
+  ({ss}<<|projectOfStudent: students <-> projects);
+  ("`subscribeToProject preconditions in this component'" & ss: STUDENTS & ss: students & pp: PROJECTS & pp: projects & not(ss: dom(projectOfStudent)));
+  (projectOfStudent<+{ss|->pp}: students <-> projects);
+  ("`unsubscribeOfProject preconditions in this component'" & ss: STUDENTS & ss: students & pp: PROJECTS & pp: projects & ss: dom(projectOfStudent));
+  (projectOfStudent-{ss|->pp}: students <-> projects);
+  ("`createModule preconditions in this component'" & mm: MODULES & not(mm: modules));
+  (moduleOfStudent: students <-> modules\/{mm});
+  "`Check that the invariant (moduleOfProject: projects --> modules) is preserved by the operation - ref 3.4'";
+  (moduleOfProject: projects +-> modules\/{mm});
+  ("`createProject preconditions in this component'" & pp: PROJECTS & not(pp: projects) & mm: MODULES & mm: modules);
+  (moduleOfProject<+{pp|->mm}: projects\/{pp} +-> modules);
+  (dom(moduleOfProject<+{pp|->mm}) = projects\/{pp});
+  (projectOfStudent: students <-> projects\/{pp});
+  (moduleOfProjectOfStudent: students +-> moduleOfProject<+{pp|->mm})
+END
+&
+THEORY EnumerateX 
+END
+&
+THEORY Version IS
+  POVersion("V4.0-29507")(CLT == "V4.0-31779")(genOPO == KO, genDivergencePO == KO, project_type == VALIDATION_TYPE, local_op == OK)
+END

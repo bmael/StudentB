@@ -1,0 +1,13 @@
+﻿THEORY User_Pass IS
+Operation(Initialisation) & ff(0) & pr;
+Operation(subscribe) & ff(0) & pr;
+Operation(unsubscribe) & ff(0) & pr;
+Operation(unsubscribe) & ff(2) & pr;
+Operation(subscribeToModule) & ff(0) & pr;
+Operation(unsubscribeOfModule) & ff(0) & pr;
+Operation(subscribeToProject) & ff(0) & pr;
+Operation(unsubscribeOfProject) & ff(0) & pr;
+Operation(createModule) & ff(0) & pr;
+Operation(createProject) & ff(0) & pr;
+Operation(createProject) & ff(0) & pp(rt.1)
+END 
